@@ -64,7 +64,7 @@ export default function Navbar() {
         <NavLink to="/feed" className="px-2" activeClassName="text-purple-500">
           <MessageSquare />
         </NavLink>
-        <a href="https://play.google.com/store/apps/details?id=com.doaku" className="px-2">
+        <a href="https://play.google.com/store/apps/details?id=com.doaku" target="_blank" className="px-2">
           <Download />
         </a>
         <div className="md:hidden block px-2 cursor-pointer" onClick={() => dispatch(toggleIsSearch())}>
