@@ -7,6 +7,7 @@ import {useLocation} from "react-router-dom";
 import Logo from "../../assets/images/Logo.png";
 
 export default function Navbar() {
+  const {keyword} = useSelector(state => state.navbar); 
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -31,8 +32,10 @@ export default function Navbar() {
           <input
             name="key"
             type="text"
+            value={keyword}
             className="focus:outline-none"
             placeholder="Search..."
+            onChange={(e) => dispatch(changeKey(e.target.value))}
           />
           <button type="submit">
             <Search />

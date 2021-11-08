@@ -3,8 +3,9 @@ import {motion} from "framer-motion";
 import {useDispatch, useSelector} from "react-redux";
 import DoaItem from "../../components/doa-item/DoaItem";
 import Loading from "../../components/loading/Loading";
-import {getAllDoas} from "../home/homeSlice";
 import PageAnimate from "../../components/page-animate/PageAnimate";
+import { changeKey, setResult } from "../../components/navbar/navbarSlice";
+import Empty from "../empty/Empty";
 
 const itemVariants = {
   initial: {
@@ -24,18 +25,26 @@ const itemVariants = {
 
 export default function SearchPage() {
   const {doas, loading} = useSelector((state) => state.home);
+  const {keyword, result} = useSelector(state => state.navbar);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!doas.length) {
-      dispatch(getAllDoas());
+    dispatch(setResult(doas));
+
+    
+  }, [keyword]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(changeKey(""));
     }
-  }, []);
+  }, [])
+
   return (
     <PageAnimate>
       <div className="w-full flex flex-wrap">
         {!loading ? (
-          doas.map((d, index) => (
+          (keyword == "" ? doas : result).map((d, index) => (
             <motion.div
               variants={itemVariants}
               custom={index}
@@ -50,6 +59,8 @@ export default function SearchPage() {
         ) : (
           <Loading w="w-1/4" h="h-24" count={8} />
         )}
+
+        {(keyword != "" && result.lenght == 0) && <Empty type={404} text="Not Found" /> }
       </div>
     </PageAnimate>
   );
