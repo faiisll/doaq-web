@@ -1,13 +1,14 @@
 import React, {useEffect} from "react";
 import {Link, NavLink, useHistory} from "react-router-dom";
 import {Home, Download, MessageSquare, Search} from "react-feather";
-import {changeActive, changeKey} from "./navbarSlice";
+import {changeActive, changeKey, toggleIsSearch} from "./navbarSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation} from "react-router-dom";
 import Logo from "../../assets/images/Logo.png";
+import MobileSearch from "../mobile-search/MobileSearch";
 
 export default function Navbar() {
-  const {keyword} = useSelector(state => state.navbar); 
+  const {keyword, isSearch} = useSelector(state => state.navbar); 
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -22,7 +23,8 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="w-full py-10 px-2 flex justify-between items-center">
+    <nav className="w-full py-10 px-2 flex justify-between items-center relative">
+      {isSearch && <MobileSearch />}
       <Link to="/">
         <img src={Logo} alt="Logo" width="60px" />
       </Link>
@@ -65,6 +67,9 @@ export default function Navbar() {
         <a href="https://play.google.com/store/apps/details?id=com.doaku" className="px-2">
           <Download />
         </a>
+        <div className="md:hidden block px-2 cursor-pointer" onClick={() => dispatch(toggleIsSearch())}>
+          <Search />
+        </div>
       </div>
     </nav>
   );

@@ -30,15 +30,8 @@ export default function SearchPage() {
 
   useEffect(() => {
     dispatch(setResult(doas));
-
-    
   }, [keyword]);
 
-  useEffect(() => {
-    return () => {
-      dispatch(changeKey(""));
-    }
-  }, [])
 
   return (
     <PageAnimate>

@@ -1,11 +1,8 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import bg from '../../assets/images/bg.svg'
-import useSound from 'use-sound';
-import click from '../../assets/sounds/click.mp3';
 
 export default function CategoryItem({data}) {
-  const [play] = useSound(click);
   return (
     <Link to={"/category/"+data.id} >
       <div

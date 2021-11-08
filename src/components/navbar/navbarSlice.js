@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     path: "/",
     keyword: "",
-    result: []
+    result: [],
+    isSearch: false
 }
 export const navbarSlice = createSlice({
     name: "navbar",
@@ -25,9 +26,12 @@ export const navbarSlice = createSlice({
             }else{
                 state.result = [];
             }
+        },
+        toggleIsSearch: (state) => {
+            state.isSearch = !state.isSearch;
         }
     }
 });
 
-export const {changeActive, changeKey, setResult} = navbarSlice.actions
+export const {changeActive, changeKey, setResult, toggleIsSearch} = navbarSlice.actions
 export default navbarSlice.reducer

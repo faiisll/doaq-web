@@ -17,7 +17,7 @@ function App() {
     }
   }, []);
   return (
-    <div className="w-full h-full md:px-10 px-4">
+    <div className="w-full h-full md:px-10 px-4 relative">
       <Router>
         <Navbar />
         <Routes />

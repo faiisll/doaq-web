@@ -34,7 +34,10 @@ export const doaSlice = createSlice({
         },
         [getDoa.fulfilled]: (state, action) => {
             state.loading = false;
-            state.data = action.payload;
+
+            if(action.payload.doa !== null){
+                state.data = action.payload;
+            }
         }
       
     }
